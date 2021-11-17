@@ -4,12 +4,12 @@ import java.util.List;
 
 public class ClientApplication {
     private int id;
-    private CakeSpec info;
+    private CakeSpec cakeSpec;
     private List<CakeInvoice> cakeInvoices;
 
-    public ClientApplication(int id, CakeSpec info, List<CakeInvoice> cakeInvoices) {
+    public ClientApplication(int id, CakeSpec cakeSpec, List<CakeInvoice> cakeInvoices) {
         this.id = id;
-        this.info = info;
+        this.cakeSpec = cakeSpec;
         this.cakeInvoices = cakeInvoices;
     }
 
@@ -24,12 +24,12 @@ public class ClientApplication {
         this.id = id;
     }
 
-    public CakeSpec getInfo() {
-        return info;
+    public CakeSpec getCakeSpec() {
+        return cakeSpec;
     }
 
-    public void setInfo(CakeSpec info) {
-        this.info = info;
+    public void setCakeSpec(CakeSpec cakeSpec) {
+        this.cakeSpec = cakeSpec;
     }
 
     public List<CakeInvoice> cakeInvoices() {
