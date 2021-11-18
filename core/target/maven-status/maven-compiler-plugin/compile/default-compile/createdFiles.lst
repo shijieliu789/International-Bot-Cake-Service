@@ -1,0 +1,11 @@
+service\core\FillingPrice.class
+service\core\FlavorPrice.class
+service\core\CakeTypePrice.class
+service\core\ClientApplication.class
+service\core\DecorationIntricacy.class
+service\core\AbstractCakeService.class
+service\core\IcingPrice.class
+service\core\CakeInvoice.class
+service\core\CakeSpec.class
+service\core\ToppingsPrice.class
+service\core\NoSuchCakeException.class
