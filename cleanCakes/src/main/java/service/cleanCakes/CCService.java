@@ -6,10 +6,7 @@ import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
-import service.core.AbstractCakeService;
-import service.core.CakeInvoice;
-import service.core.CakeSpec;
-import service.core.NoSuchCakeException;
+import service.core.*;
 
 import java.net.URI;
 import java.net.URISyntaxException;

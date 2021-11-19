@@ -1,19 +1,16 @@
 package service.core;
 
-import java.util.ArrayList;
-import java.util.List;
-
 public class CakeSpec implements java.io.Serializable{
-	private int cakeType;
-	private ArrayList<Integer> topping;
-	private int flavor;
-	private int icing;
+	private String cakeType;
+	private String topping;
+	private String flavor;
+	private String icing;
 	private int serving;
-	private int decor;
+	private String decor;
 	private String occasion;
 	private String county;
 
-	public CakeSpec(int cakeType, ArrayList<Integer> topping, int flavor, int icing, int serving, int decor, String occasion, String county) {
+	public CakeSpec(String cakeType, String topping, String flavor, String icing, int serving, String decor, String occasion, String county) {
 		this.cakeType = cakeType;
 		this.topping = topping;
 		this.flavor = flavor;
@@ -26,35 +23,35 @@ public class CakeSpec implements java.io.Serializable{
 
 	public CakeSpec(){}
 
-	public int getCakeType() {
+	public String getCakeType() {
 		return cakeType;
 	}
 
-	public void setCakeType(int cakeType) {
+	public void setCakeType(String cakeType) {
 		this.cakeType = cakeType;
 	}
 
-	public ArrayList<Integer> getTopping() {
+	public String getTopping() {
 		return topping;
 	}
 
-	public void setTopping(ArrayList<Integer> topping) {
+	public void setTopping(String topping) {
 		this.topping = topping;
 	}
 
-	public int getFlavor() {
+	public String getFlavor() {
 		return flavor;
 	}
 
-	public void setFlavor(int flavor) {
+	public void setFlavor(String flavor) {
 		this.flavor = flavor;
 	}
 
-	public int getIcing() {
+	public String getIcing() {
 		return icing;
 	}
 
-	public void setIcing(int icing) {
+	public void setIcing(String icing) {
 		this.icing = icing;
 	}
 
@@ -66,11 +63,11 @@ public class CakeSpec implements java.io.Serializable{
 		this.serving = serving;
 	}
 
-	public int getDecor() {
+	public String getDecor() {
 		return decor;
 	}
 
-	public void setDecor(int decor) {
+	public void setDecor(String decor) {
 		this.decor = decor;
 	}
 
