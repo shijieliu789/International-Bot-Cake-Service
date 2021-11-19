@@ -8,5 +8,6 @@
     <modules>
         <module>cleanCakes</module>
         <module>core</module>
+        <module>cakeShops</module>
     </modules>
 </project>

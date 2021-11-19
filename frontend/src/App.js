@@ -1,7 +1,82 @@
 import logo from './logo.svg';
 import './App.css';
+import {useState} from 'react';
 
 function App() {
+    const CAKE_TYPE = [{
+        key: "TRADITIONAL_STACK",
+        value: 1
+    }];
+    const TOPPING = [{
+        key: "OREO",
+        value: [1,2]
+    }];
+    const FLAVOR = [{
+        key: "VANILLA",
+        value: 3
+    }];
+    const ICING = [{
+        key: "FONDANT",
+        value: 4
+    }];
+    const SERVING = [1];
+    const DECOR = [{
+        key: "BASIC",
+        value: 5
+    }];
+    const OCCASION = [{
+        key: "FUN",
+        value: 7
+    }];
+    const COUNTY = [{
+        key: "DUBLIN",
+        value: 8
+    }];
+
+    const [values, setValues] = useState({
+        cakeType: '', topping: '', flavor: '', icing: '', serving: '', decor: '',
+        occasion: '', county: ''
+    });
+
+    const set = name => {
+        return ({target: {value}}) => {
+            setValues(oldValues => ({...oldValues, [name]: value}));
+        }
+    };
+
+    const saveFormData = async () => {
+        console.log(values)
+
+        const response = await fetch('http://localhost:8080/queries', {
+            method: 'POST',
+            // mode: 'no-cors',
+            headers: {
+                // Overwrite Axios's automatically set Content-Type
+                'Content-Type': 'application/json',
+                'Access-Control-Allow-Origin': 'http://localhost:8081/cake',
+                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
+                'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS'
+            },
+            body: JSON.stringify(values)
+        });
+        if (response.status !== 200) {
+            throw new Error(`Request failed: ${response.status}`);
+        }
+    }
+
+    const onSubmit = async (event) => {
+        event.preventDefault(); // Prevent default submission
+        try {
+            await saveFormData();
+            alert('Your registration was successfully submitted!');
+            setValues({
+                cakeType: '', topping: '', flavor: '', icing: '', serving: '', decor: '',
+                occasion: '', county: ''
+            });
+        } catch (e) {
+            alert(`Registration failed! ${e.message}`);
+        }
+    }
 
     return (
         <div className="App">
@@ -11,7 +86,69 @@ function App() {
                     InternationalBot Cake Services
                 </p>
             </header>
+            <body className="main-body">
+            <form onSubmit={onSubmit}>
+                <h2>Make your Cake!</h2>
+                <div>
+                    <label>Cake Type:</label>
+                    <select required value={values.cakeType} onChange={set('cakeType')}>
+                        <option value="">Select cake type</option>
+                        {CAKE_TYPE.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Toppings:</label>
+                    <select required value={values.topping} onChange={set('topping')}>
+                        <option value="">Select toppings</option>
+                        {TOPPING.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Flavor:</label>
+                    <select required value={values.flavor} onChange={set('flavor')}>
+                        <option value="">Select flavor</option>
+                        {FLAVOR.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Icing:</label>
+                    <select required value={values.icing} onChange={set('icing')}>
+                        <option value="">Select icing</option>
+                        {ICING.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Serving:</label>
+                    <select required value={values.serving} onChange={set('serving')}>
+                        <option value="">Select serving</option>
+                        {SERVING.map(c => <option value={c}>{c}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Decoration Intricacy:</label>
+                    <select required value={values.decor} onChange={set('decor')}>
+                        <option value="">Select intricacy</option>
+                        {DECOR.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>Occasion:</label>
+                    <select required value={values.occasion} onChange={set('occasion')}>
+                        <option value="">Select occasion</option>
+                        {OCCASION.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
+                <div>
+                    <label>County:</label>
+                    <select required value={values.county} onChange={set('county')}>
+                        <option value="">Select county</option>
+                        {COUNTY.map(c => <option value={c.value}>{c.key}</option>)}
+                    </select>
+                </div>
 
+                <button type="submit">Submit</button>
+            </form>
+            </body>
         </div>
 
     );

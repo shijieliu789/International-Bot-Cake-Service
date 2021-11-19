@@ -1,39 +1,36 @@
 package service.core;
 
-import java.util.Date;
 import java.util.List;
 
 public class CakeSpec implements java.io.Serializable{
-	private int cakeTypePrice;
+	private int cakeType;
 	private List<Integer> topping;
-	private int flavorPrice;
-	private int icingPrice;
-	private int servingSize;
-	private int decorationIntricacy;
-	private Date dateExpected;
+	private int flavor;
+	private int icing;
+	private int serving;
+	private int decor;
 	private String occasion;
 	private String county;
 
-	public CakeSpec(int cakeTypePrice, List<Integer> topping, int flavor, int icing, int servingSize, int decor, Date dateExpected, String occasion, String county) {
-		this.cakeTypePrice = cakeTypePrice;
+	public CakeSpec(int cakeType, List<Integer> topping, int flavor, int icing, int serving, int decor, String occasion, String county) {
+		this.cakeType = cakeType;
 		this.topping = topping;
-		this.flavorPrice = flavor;
-		this.icingPrice = icing;
-		this.servingSize = servingSize;
-		this.decorationIntricacy = decor;
-		this.dateExpected = dateExpected;
+		this.flavor = flavor;
+		this.icing = icing;
+		this.serving = serving;
+		this.decor = decor;
 		this.occasion = occasion;
 		this.county = county;
 	}
 
 	public CakeSpec(){}
 
-	public int getCakeTypePrice() {
-		return cakeTypePrice;
+	public int getCakeType() {
+		return cakeType;
 	}
 
-	public void setCakeTypePrice(int cakeTypePrice) {
-		this.cakeTypePrice = cakeTypePrice;
+	public void setCakeType(int cakeType) {
+		this.cakeType = cakeType;
 	}
 
 	public List<Integer> getTopping() {
@@ -44,44 +41,36 @@ public class CakeSpec implements java.io.Serializable{
 		this.topping = topping;
 	}
 
-	public int getFlavorPrice() {
-		return flavorPrice;
+	public int getFlavor() {
+		return flavor;
 	}
 
-	public void setFlavorPrice(int flavorPrice) {
-		this.flavorPrice = flavorPrice;
+	public void setFlavor(int flavor) {
+		this.flavor = flavor;
 	}
 
-	public int getIcingPrice() {
-		return icingPrice;
+	public int getIcing() {
+		return icing;
 	}
 
-	public void setIcingPrice(int icingPrice) {
-		this.icingPrice = icingPrice;
+	public void setIcing(int icing) {
+		this.icing = icing;
 	}
 
-	public int getServingSize() {
-		return servingSize;
+	public int getServing() {
+		return serving;
 	}
 
-	public void setServingSize(int servingSize) {
-		this.servingSize = servingSize;
+	public void setServing(int serving) {
+		this.serving = serving;
 	}
 
-	public int getDecorationIntricacy() {
-		return decorationIntricacy;
+	public int getDecor() {
+		return decor;
 	}
 
-	public void setDecorationIntricacy(int decorationIntricacy) {
-		this.decorationIntricacy = decorationIntricacy;
-	}
-
-	public Date getDateExpected() {
-		return dateExpected;
-	}
-
-	public void setDateExpected(Date dateExpected) {
-		this.dateExpected = dateExpected;
+	public void setDecor(int decor) {
+		this.decor = decor;
 	}
 
 	public String getOccasion() {

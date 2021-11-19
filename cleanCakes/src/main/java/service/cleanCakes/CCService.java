@@ -2,6 +2,7 @@ package service.cleanCakes;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -22,8 +23,11 @@ public class CCService extends AbstractCakeService {
 
     private Map<String, CakeInvoice> invoices = new HashMap<>();
 
-    @RequestMapping(value="/cake", method= RequestMethod.POST)
-    public ResponseEntity<CakeInvoice> createInvoice(@RequestBody CakeSpec cakeSpec) throws URISyntaxException {
+    @RequestMapping(value="/cake", method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    public @ResponseBody ResponseEntity<CakeInvoice> createInvoice(@RequestBody CakeSpec cakeSpec) throws URISyntaxException {
+        System.out.println(cakeSpec.getCakeType());
+        System.out.println(cakeSpec.getCounty());
+
         // generate cake invoice from cake specifications
         CakeInvoice invoice = generateCake(cakeSpec);
 
@@ -33,7 +37,7 @@ public class CCService extends AbstractCakeService {
         return new ResponseEntity<>(invoice, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/cake/{reference}",method=RequestMethod.GET)
+    @RequestMapping(value="/cake/{reference}",method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
     public CakeInvoice getResource(@PathVariable("reference") String reference){
         CakeInvoice createdCake = invoices.get(reference);
         if (createdCake == null) throw new NoSuchCakeException();
