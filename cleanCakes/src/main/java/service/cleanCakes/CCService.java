@@ -16,6 +16,7 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
+@CrossOrigin
 @RestController
 public class CCService extends AbstractCakeService {
     public static final String PREFIX = "CC";

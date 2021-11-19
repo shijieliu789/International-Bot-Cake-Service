@@ -47,21 +47,29 @@ function App() {
     const saveFormData = async () => {
         console.log(values)
 
-        const response = await fetch('http://localhost:8080/queries', {
-            method: 'POST',
-            // mode: 'no-cors',
-            headers: {
-                // Overwrite Axios's automatically set Content-Type
-                'Content-Type': 'application/json',
-                'Access-Control-Allow-Origin': 'http://localhost:8081/cake',
-                'Access-Control-Allow-Headers': 'Origin, X-Requested-With, Content-Type, Accept, Authorization',
-                'Access-Control-Request-Method': 'GET, POST, DELETE, PUT, OPTIONS'
-            },
-            body: JSON.stringify(values)
-        });
-        if (response.status !== 200) {
-            throw new Error(`Request failed: ${response.status}`);
+        // const response = await fetch('cake', {
+        //     method: 'POST',
+        //     headers: {
+        //         // Overwrite Axios's automatically set Content-Type
+        //         'Content-Type': 'application/json',
+        //     },
+        //     body: JSON.stringify(values)
+        // });
+        // if (response.status !== 200) {
+        //     throw new Error(`Request failed: ${response.status}`);
+        // }
+
+        const xhr = new XMLHttpRequest();
+        const url = "http://localhost:8081/cake";
+        xhr.open("POST", url, false);
+        xhr.setRequestHeader("Content-Type", "application/json;charset=UTF-8");
+        xhr.onload = function() {
+            // for dynamic state to be implemented
+        };
+        xhr.onerror = function() {
+            alert("Error: " + url + " is not reachable, request timed out.");
         }
+        xhr.send(JSON.stringify(values));
     }
 
     const onSubmit = async (event) => {
@@ -121,7 +129,7 @@ function App() {
                     <label>Serving:</label>
                     <select required value={values.serving} onChange={set('serving')}>
                         <option value="">Select serving</option>
-                        {SERVING.map(c => <option value={c}>{c}</option>)}
+                        {SERVING.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>

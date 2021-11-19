@@ -1,10 +1,11 @@
 package service.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class CakeSpec implements java.io.Serializable{
 	private int cakeType;
-	private List<Integer> topping;
+	private ArrayList<Integer> topping;
 	private int flavor;
 	private int icing;
 	private int serving;
@@ -12,7 +13,7 @@ public class CakeSpec implements java.io.Serializable{
 	private String occasion;
 	private String county;
 
-	public CakeSpec(int cakeType, List<Integer> topping, int flavor, int icing, int serving, int decor, String occasion, String county) {
+	public CakeSpec(int cakeType, ArrayList<Integer> topping, int flavor, int icing, int serving, int decor, String occasion, String county) {
 		this.cakeType = cakeType;
 		this.topping = topping;
 		this.flavor = flavor;
@@ -33,11 +34,11 @@ public class CakeSpec implements java.io.Serializable{
 		this.cakeType = cakeType;
 	}
 
-	public List<Integer> getTopping() {
+	public ArrayList<Integer> getTopping() {
 		return topping;
 	}
 
-	public void setTopping(List<Integer> topping) {
+	public void setTopping(ArrayList<Integer> topping) {
 		this.topping = topping;
 	}
 
