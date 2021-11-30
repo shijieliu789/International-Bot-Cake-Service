@@ -13,7 +13,6 @@ import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
 
-@CrossOrigin
 @RestController
 public class CCService extends AbstractCakeService {
     public static final String PREFIX = "CC";
@@ -21,7 +20,7 @@ public class CCService extends AbstractCakeService {
 
     private Map<String, CakeInvoice> invoices = new HashMap<>();
 
-    @RequestMapping(value="/cake", method= RequestMethod.POST, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/cake", method= RequestMethod.POST)
     public @ResponseBody ResponseEntity<CakeInvoice> createInvoice(@RequestBody CakeSpec cakeSpec) throws URISyntaxException {
         System.out.println(cakeSpec.getCakeType());
         System.out.println(cakeSpec.getCounty());
@@ -29,13 +28,16 @@ public class CCService extends AbstractCakeService {
         // generate cake invoice from cake specifications
         CakeInvoice invoice = generateCake(cakeSpec);
 
+        //add to list of invoices
+        invoices.put(invoice.getReference(), invoice);
+
         String path = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+ "/cake/"+invoice.getReference();
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(new URI(path));
         return new ResponseEntity<>(invoice, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value="/cake/{reference}",method=RequestMethod.GET, consumes = MediaType.APPLICATION_JSON_VALUE)
+    @RequestMapping(value="/cake/{reference}",method=RequestMethod.GET)
     public CakeInvoice getResource(@PathVariable("reference") String reference){
         CakeInvoice createdCake = invoices.get(reference);
         if (createdCake == null) throw new NoSuchCakeException();

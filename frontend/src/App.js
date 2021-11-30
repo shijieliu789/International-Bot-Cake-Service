@@ -47,7 +47,7 @@ function App() {
     const saveFormData = async () => {
         console.log(values)
 
-        const response = await fetch('http://localhost:8081/cake', {
+        const response = await fetch('http://localhost:8080/applications', {
             method: 'POST',
             headers: {
                 // Overwrite Axios's automatically set Content-Type
