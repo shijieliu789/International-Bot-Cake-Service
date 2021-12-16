@@ -2,7 +2,6 @@ package service.cleanCakes;
 
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import org.springframework.web.servlet.support.ServletUriComponentsBuilder;
@@ -12,6 +11,7 @@ import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.Objects;
 
 @RestController
 public class CCService extends AbstractCakeService {
@@ -22,8 +22,6 @@ public class CCService extends AbstractCakeService {
 
     @RequestMapping(value="/cake", method= RequestMethod.POST)
     public @ResponseBody ResponseEntity<CakeInvoice> createInvoice(@RequestBody CakeSpec cakeSpec) throws URISyntaxException {
-        System.out.println(cakeSpec.getCakeType());
-        System.out.println(cakeSpec.getCounty());
 
         // generate cake invoice from cake specifications
         CakeInvoice invoice = generateCake(cakeSpec);
@@ -45,12 +43,45 @@ public class CCService extends AbstractCakeService {
     }
 
     public CakeInvoice generateCake(CakeSpec cakeSpec) {
-        //TO BE IMPLEMENTED
         return new CakeInvoice(COMPANY, generateReference(PREFIX), generatePrice(cakeSpec));
     }
 
-    public double generatePrice(CakeSpec cakeSpec){
-        // TO BE IMPLEMENTED
-        return 777;
+    public double generatePrice(CakeSpec cakeSpec) {
+        double price = 0;
+        if(Objects.equals(cakeSpec.getCakeType(), "TRADITIONAL_STACK")) {
+            System.out.println(cakeSpec.getCakeType());
+            price += CakeTypePrice.TRADITIONAL_STACK;
+        }
+        if(Objects.equals(cakeSpec.getTopping(), "OREO")) {
+            System.out.println(cakeSpec.getTopping());
+            price += ToppingsPrice.OREO;
+        }
+        if(Objects.equals(cakeSpec.getFlavor(), "VANILLA")) {
+            System.out.println(cakeSpec.getFlavor());
+            price += FlavorPrice.VANILLA;
+        }
+        if(Objects.equals(cakeSpec.getIcing(), "FONDANT")) {
+            System.out.println(cakeSpec.getIcing());
+            price += IcingPrice.FONDANT;
+        }
+        if(Objects.equals(cakeSpec.getServing(), "1")) {
+            System.out.println(cakeSpec.getServing());
+            price += 3;
+        }
+        if(Objects.equals(cakeSpec.getDecor(), "BASIC")) {
+            System.out.println(cakeSpec.getDecor());
+            price += DecorationIntricacy.BASIC;
+        }
+        if(Objects.equals(cakeSpec.getOccasion(), "FUN")) {
+            System.out.println(cakeSpec.getOccasion());
+            price += 5;
+        }
+        if(Objects.equals(cakeSpec.getCounty(), "DUBLIN")) {
+            System.out.println(cakeSpec.getCounty());
+            price += 6;
+        }
+        System.out.println(price);
+        return price;
     }
+
 }

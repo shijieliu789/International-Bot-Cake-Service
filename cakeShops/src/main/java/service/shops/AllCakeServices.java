@@ -47,8 +47,8 @@ public class AllCakeServices {
             System.out.println("This service is available but can't be used here.");
         }
 
-
         ClientApplication clientApplication=new ClientApplication(appID,cakeSpec,cakes);
+        System.out.println(clientApplication.cakeInvoices().get(0).getPrice());
         String path = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+ "/applications/" + appID;
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(new URI(path));

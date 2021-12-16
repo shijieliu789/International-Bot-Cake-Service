@@ -5,12 +5,12 @@ public class CakeSpec implements java.io.Serializable{
 	private String topping;
 	private String flavor;
 	private String icing;
-	private int serving;
+	private String serving;
 	private String decor;
 	private String occasion;
 	private String county;
 
-	public CakeSpec(String cakeType, String topping, String flavor, String icing, int serving, String decor, String occasion, String county) {
+	public CakeSpec(String cakeType, String topping, String flavor, String icing, String serving, String decor, String occasion, String county) {
 		this.cakeType = cakeType;
 		this.topping = topping;
 		this.flavor = flavor;
@@ -55,11 +55,11 @@ public class CakeSpec implements java.io.Serializable{
 		this.icing = icing;
 	}
 
-	public int getServing() {
+	public String getServing() {
 		return serving;
 	}
 
-	public void setServing(int serving) {
+	public void setServing(String serving) {
 		this.serving = serving;
 	}
 
