@@ -155,6 +155,21 @@ function App() {
 
     const OCCASION = [
         {
+            key: "CASUAL",
+            value: "CASUAL"
+        },
+        {
+            key: "WEDDING",
+            value: "WEDDING"
+        },
+        {
+            key: "BIRTHDAY",
+            value: "BIRTHDAY"
+        }
+    ];
+
+    const COUNTY = [
+        {
             key: "DUBLIN",
             value: "DUBLIN"
         },
@@ -180,20 +195,7 @@ function App() {
         }
     ];
 
-    const COUNTY = [
-        {
-            key: "CASUAL",
-            value: "CASUAL"
-        },
-        {
-            key: "WEDDING",
-            value: "WEDDING"
-        },
-        {
-            key: "BIRTHDAY",
-            value: "BIRTHDAY"
-        }
-    ];
+
 
     const [values, setValues] = useState({
         cakeType: '', topping: '', flavor: '', icing: '', serving: '', decor: '',
