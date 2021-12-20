@@ -3,35 +3,197 @@ import './App.css';
 import {useState} from 'react';
 
 function App() {
-    const CAKE_TYPE = [{
-        key: "TRADITIONAL_STACK",
-        value: 1
-    }];
-    const TOPPING = [{
-        key: "OREO",
-        value: "oreo"
-    }];
-    const FLAVOR = [{
-        key: "VANILLA",
-        value: 3
-    }];
-    const ICING = [{
-        key: "FONDANT",
-        value: 4
-    }];
-    const SERVING = [1];
-    const DECOR = [{
-        key: "BASIC",
-        value: 5
-    }];
-    const OCCASION = [{
-        key: "FUN",
-        value: 7
-    }];
-    const COUNTY = [{
-        key: "DUBLIN",
-        value: 8
-    }];
+    const CAKE_TYPE = [
+        {
+            key: "TRADITIONAL STACK",
+            value: "TRADITIONAL_STACK"
+        },
+        {
+            key: "BUTTER CAKE",
+            value: "BUTTER_CAKE"
+        },
+        {
+            key: "FRUIT FILLED",
+            value: "FRUIT_FILLED"
+        },
+        {
+            key: "SHEET CAKE",
+            value: "SHEET_CAKE"
+        },
+        {
+            key: "BISCUIT CAKE",
+            value: "BISCUIT_CAKE"
+        },
+        {
+            key: "MERINGUE CAKE",
+            value: "MERINGUE_CAKE"
+        },
+        {
+            key: "CHEESE CAKE",
+            value: "CHEESE_CAKE"
+        }
+        ];
+
+    const TOPPING = [
+        {
+            key: "CHOCOLATE CHIPS",
+            value: "CHOCOLATE_CHIPS"
+        },
+        {
+            key: "OREO",
+            value: "OREO"
+        },
+        {
+            key: "MANGO",
+            value: "MANGO"
+        },
+        {
+            key: "STRAWBERRY",
+            value: "STRAWBERRY"
+        },
+        {
+            key: "GRAHAM",
+            value: "GRAHAM"
+        },
+        {
+            key: "COOKIE ASSORTMENT",
+            value: "COOKIE_ASSORTMENT"
+        },
+        {
+            key: "FRUIT ASSORTMENT",
+            value: "FRUIT_ASSORTMENT"
+        },
+        {
+            key: "NUTS",
+            value: "NUTS"
+        }
+    ];
+
+    const FLAVOR = [
+        {
+            key: "VANILLA",
+            value: "VANILLA"
+        },
+        {
+            key: "CHOCOLATE",
+            value: "CHOCOLATE"
+        },
+        {
+            key: "CARROT",
+            value: "CARROT"
+        },
+        {
+            key: "RED VELVET",
+            value: "RED_VELVET"
+        },
+        {
+            key: "COFFEE",
+            value: "COFFEE"
+        },
+        {
+            key: "LEMON",
+            value: "LEMON"
+        }
+    ];
+
+    const ICING = [
+        {
+            key: "FONDANT",
+            value: "FONDANT"
+        },
+        {
+            key: "BUTTERCREAM",
+            value: "BUTTERCREAM"
+        },
+        {
+            key: "WHIPPED CREAM",
+            value: "WHIPPED_CREAM"
+        },
+        {
+            key: "ROYAL ICING",
+            value: "ROYAL_ICING"
+        },
+        {
+            key: "CREAM CHEESE FROST",
+            value: "CREAM_CHEESE_FROST"
+        },
+        {
+            key: "MERINGUE",
+            value: "MERINGUE"
+        }
+    ];
+
+    const SERVING = [
+        {
+            key: "6 inches",
+            value: "6 inches"
+        },
+        {
+            key: "8 inches",
+            value: "8 inches"
+        },
+        {
+            key: "12 inches",
+            value: "12 inches"
+        }
+    ];
+
+    const DECOR = [
+        {
+            key: "BASIC",
+            value: "BASIC"
+        },
+        {
+            key: "MEDIOCRE",
+            value: "MEDIOCRE"
+        },
+        {
+            key: "HIGH CLASS",
+            value: "HIGH CLASS"
+        }
+    ];
+
+    const OCCASION = [
+        {
+            key: "DUBLIN",
+            value: "DUBLIN"
+        },
+        {
+            key: "MEATH",
+            value: "MEATH"
+        },
+        {
+            key: "WICKLOW",
+            value: "WICKLOW"
+        },
+        {
+            key: "LOUTH",
+            value: "LOUTH"
+        },
+        {
+            key: "KILDARE",
+            value: "KILDARE"
+        },
+        {
+            key: "CARLOW",
+            value: "CARLOW"
+        }
+    ];
+
+    const COUNTY = [
+        {
+            key: "CASUAL",
+            value: "CASUAL"
+        },
+        {
+            key: "WEDDING",
+            value: "WEDDING"
+        },
+        {
+            key: "BIRTHDAY",
+            value: "BIRTHDAY"
+        }
+    ];
 
     const [values, setValues] = useState({
         cakeType: '', topping: '', flavor: '', icing: '', serving: '', decor: '',
@@ -135,7 +297,7 @@ function App() {
                     <label>Serving:</label>
                     <select required value={values.serving} onChange={set('serving')}>
                         <option value="">Select serving</option>
-                        {SERVING.map(c => <option value={c}>{c}</option>)}
+                        {SERVING.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
