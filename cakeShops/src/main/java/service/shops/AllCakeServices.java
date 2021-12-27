@@ -33,7 +33,7 @@ public class AllCakeServices {
         HttpEntity<CakeSpec> request = new HttpEntity<>(cakeSpec);
 
         //init URIs
-        URI cleanCakes = new URI("http://localhost:8081/cake");
+        URI cleanCakes = new URI("http://localhost:8081/ccake");
 
         //open connection
         HttpURLConnection openConnection = (HttpURLConnection) cleanCakes.toURL().openConnection();

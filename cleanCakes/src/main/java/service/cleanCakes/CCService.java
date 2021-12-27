@@ -20,7 +20,7 @@ public class CCService extends AbstractCakeService {
 
     private Map<String, CakeInvoice> invoices = new HashMap<>();
 
-    @RequestMapping(value = "/cake", method = RequestMethod.POST)
+    @RequestMapping(value = "/ccake", method = RequestMethod.POST)
     public @ResponseBody
     ResponseEntity<CakeInvoice> createInvoice(@RequestBody CakeSpec cakeSpec) throws URISyntaxException {
 
@@ -30,13 +30,13 @@ public class CCService extends AbstractCakeService {
         //add to list of invoices
         invoices.put(invoice.getReference(), invoice);
 
-        String path = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/cake/" + invoice.getReference();
+        String path = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString() + "/ccake/" + invoice.getReference();
         HttpHeaders headers = new HttpHeaders();
         headers.setLocation(new URI(path));
         return new ResponseEntity<>(invoice, headers, HttpStatus.CREATED);
     }
 
-    @RequestMapping(value = "/cake/{reference}", method = RequestMethod.GET)
+    @RequestMapping(value = "/ccake/{reference}", method = RequestMethod.GET)
     public CakeInvoice getResource(@PathVariable("reference") String reference) {
         CakeInvoice createdCake = invoices.get(reference);
         if (createdCake == null) throw new NoSuchCakeException();
