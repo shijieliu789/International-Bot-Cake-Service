@@ -1,11 +1,12 @@
 package service.core;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class ClientApplication {
     private int id;
     private CakeSpec cakeSpec;
-    private List<CakeInvoice> cakeInvoices;
+    private List<CakeInvoice> cakeInvoices = new ArrayList<>();
 
     public ClientApplication(int id, CakeSpec cakeSpec, List<CakeInvoice> cakeInvoices) {
         this.id = id;
@@ -36,7 +37,7 @@ public class ClientApplication {
         return cakeInvoices;
     }
 
-    public void setQuotations(List<CakeInvoice> cakeInvoices) {
+    public void setCakeInvoices(List<CakeInvoice> cakeInvoices) {
         this.cakeInvoices = cakeInvoices;
     }
 }

@@ -211,18 +211,30 @@ function App() {
     const saveFormData = async () => {
         console.log(values)
 
-        const response = await fetch('http://localhost:8080/applications', {
-            method: 'POST',
-            headers: {
-                // Overwrite Axios's automatically set Content-Type
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(values)
-        });
-        if (response.status === 201) {
-            alert(`Request created: ${response.status}`);
-        } else if (response.status !== 200) {
-            throw new Error(`Request failed: ${response.status}`);
+        try {
+            const response = await fetch('http://localhost:8080/applications', {
+                method: 'POST',
+                headers: {
+                    // Overwrite Axios's automatically set Content-Type
+                    'Content-Type': 'application/json',
+                },
+                body: JSON.stringify(values)
+            });
+
+            if (response.status === 201) {
+                alert(`Request created: ${response.status}`);
+            } else if (response.status !== 200) {
+                throw new Error(`Request failed: ${response.status}`);
+            }
+
+            const sol = await response.json();
+            console.log(sol.cakeInvoices);
+            for (var i=0; i <=2; i++) {
+                alert(`${sol.cakeInvoices[i].cakery}: Price:${sol.cakeInvoices[i].price}`);
+            }
+        } catch(err) {
+            throw err;
+            console.log(err);
         }
 
         //alternative way of sending request, valid option for dynamic webpage
@@ -244,6 +256,7 @@ function App() {
         event.preventDefault(); // Prevent default submission
         try {
             await saveFormData();
+            // await cakeResponse();
             alert('Your registration was successfully submitted!');
             setValues({
                 cakeType: '', topping: '', flavor: '', icing: '', serving: '', decor: '',
@@ -253,8 +266,6 @@ function App() {
             alert(`Registration failed! ${e.message}`);
         }
     }
-
-
 
     return (
         <div className="App">
@@ -268,56 +279,56 @@ function App() {
             <form onSubmit={onSubmit}>
                 <h2>Make your Cake!</h2>
                 <div>
-                    <label>Cake Type:</label>
+                    <label>Cake Type: </label>
                     <select required value={values.cakeType} onChange={set('cakeType')}>
                         <option value="">Select cake type</option>
                         {CAKE_TYPE.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Toppings:</label>
+                    <label>Toppings: </label>
                     <select required value={values.topping} onChange={set('topping')}>
                         <option value="">Select toppings</option>
                         {TOPPING.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Flavor:</label>
+                    <label>Flavor: </label>
                     <select required value={values.flavor} onChange={set('flavor')}>
                         <option value="">Select flavor</option>
                         {FLAVOR.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Icing:</label>
+                    <label>Icing: </label>
                     <select required value={values.icing} onChange={set('icing')}>
                         <option value="">Select icing</option>
                         {ICING.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Serving:</label>
+                    <label>Serving: </label>
                     <select required value={values.serving} onChange={set('serving')}>
                         <option value="">Select serving</option>
                         {SERVING.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Decoration Intricacy:</label>
+                    <label>Decoration Intricacy: </label>
                     <select required value={values.decor} onChange={set('decor')}>
                         <option value="">Select intricacy</option>
                         {DECOR.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>Occasion:</label>
+                    <label>Occasion: </label>
                     <select required value={values.occasion} onChange={set('occasion')}>
                         <option value="">Select occasion</option>
                         {OCCASION.map(c => <option value={c.key}>{c.key}</option>)}
                     </select>
                 </div>
                 <div>
-                    <label>County:</label>
+                    <label>County: </label>
                     <select required value={values.county} onChange={set('county')}>
                         <option value="">Select county</option>
                         {COUNTY.map(c => <option value={c.key}>{c.key}</option>)}

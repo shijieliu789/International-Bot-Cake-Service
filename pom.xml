@@ -9,6 +9,7 @@
         <module>cleanCakes</module>
         <module>core</module>
         <module>cakeShops</module>
+        <module>dreamCakes</module>
         <module>bakedCakes</module>
     </modules>
 </project>

@@ -20,7 +20,7 @@
 Use the built-in continuous integration in GitLab.
 
 - [ ] [Get started with GitLab CI/CD](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/ci/quick_start/index.html)
-- [ ] [Analyze your code for known vulnerabilities with Static Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/user/application_security/sast/)
+- [ ] [Analyze your code for known vulnerabilities with Static service.dreamCakes.Application Security Testing(SAST)](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/user/application_security/sast/)
 - [ ] [Deploy to Kubernetes, Amazon EC2, or Amazon ECS using Auto Deploy](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/topics/autodevops/requirements.html)
 - [ ] [Use pull-based deployments for improved Kubernetes management](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/user/clusters/agent/)
 
