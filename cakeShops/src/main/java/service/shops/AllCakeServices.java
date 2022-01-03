@@ -34,6 +34,7 @@ public class AllCakeServices {
 
         //init URIs
         URI cleanCakes = new URI("http://localhost:8081/ccake");
+        URI bakedCakes = new URI("http://localhost:8082/bcake");
 
         //open connection
         HttpURLConnection openConnection = (HttpURLConnection) cleanCakes.toURL().openConnection();
@@ -43,6 +44,7 @@ public class AllCakeServices {
         if(responseCode == HttpURLConnection.HTTP_BAD_METHOD) {
             System.out.println("\nThis service is available, but requires methods! \n<<<Sending appropriate methods to service>>>\n");
             cakes.add(restTemplate.postForObject(cleanCakes, request, CakeInvoice.class));
+            cakes.add(restTemplate.postForObject(bakedCakes, request, CakeInvoice.class));
         } else {
             System.out.println("This service is available but can't be used here.");
         }
