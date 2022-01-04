@@ -1,9 +1,11 @@
 # International Bot
-
+Video link: https://youtu.be/Rp5wiSIk5Vo
 
 
 ## Getting started
- Use `npm start` on the frontend directory.
+ Navigate to each directory `bakedCakes` `cleanCakes` `dreamCakes` `cakeShops` and run `mvn clean compile spring-boot:run`.
+
+Use `npm start` on the frontend directory.
 ## Integrate with your tools
 
 - [ ] [Set up project integrations](https://gitlab.com/-/experiment/new_project_readme_content:ca9a6e1254d91d11e2cce7ffa8d9d22c?https://docs.gitlab.com/ee/user/project/integrations/)

@@ -277,7 +277,7 @@ function App() {
             </header>
             <body className="main-body">
             <form onSubmit={onSubmit}>
-                <h2>Make your Cake!</h2>
+                <h2 className="title">Make your Cake!</h2>
                 <div>
                     <label>Cake Type: </label>
                     <select required value={values.cakeType} onChange={set('cakeType')}>

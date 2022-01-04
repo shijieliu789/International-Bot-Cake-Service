@@ -17,7 +17,7 @@ import java.time.LocalDate;
 @CrossOrigin
 @RestController
 public class DCService extends AbstractCakeService {
-    // All references are to be prefixed with an BC (e.g. AF001000)
+    // All references are to be prefixed with an DC (e.g. DC001000)
     public static final String PREFIX = "DC";
     public static final String COMPANY = "Dream Cakes Bakery";
 
@@ -104,7 +104,7 @@ public class DCService extends AbstractCakeService {
     }
 
 
-    //depending on month of the year prices of certain items may increase || decrease
+    //depending on month of the year prices of certain items may increase or decrease
     private double getSeasonalMultiplier() {
         double multiplier = 1;
         LocalDate currentdate = LocalDate.now();

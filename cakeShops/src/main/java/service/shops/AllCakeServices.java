@@ -21,7 +21,6 @@ public class AllCakeServices {
     static int appID = 0;
 
     @RequestMapping(value="/applications", method = RequestMethod.POST, produces = MediaType.APPLICATION_JSON_VALUE)
-//    public @ResponseBody ResponseEntity<Map<Integer, ClientApplication>> makeCake(@RequestBody CakeSpec cakeSpec) throws URISyntaxException, IOException {
     public @ResponseBody String makeCake(@RequestBody CakeSpec cakeSpec) throws URISyntaxException, IOException {
 
         //just for checking if received cakeSpec is correct
@@ -34,24 +33,32 @@ public class AllCakeServices {
         RestTemplate restTemplate = new RestTemplate();
         HttpEntity<CakeSpec> request = new HttpEntity<>(cakeSpec);
 
-        //init URIs
-        URI cleanCakes = new URI("http://localhost:8081/ccake");
-        URI dreamCakes = new URI("http://localhost:8083/dcake");
-        URI bakedCakes = new URI("http://localhost:8082/bcake");
-
-        //open connection
-        HttpURLConnection openConnection = (HttpURLConnection) cleanCakes.toURL().openConnection();
-        int responseCode = openConnection.getResponseCode();
+        //init URLs
+        cakeService.add(new URL("http://localhost:8081/ccake"));
+        cakeService.add(new URL("http://localhost:8083/dcake"));
+        cakeService.add(new URL("http://localhost:8082/bcake"));
 
         //post data to URIs
-        if(responseCode == HttpURLConnection.HTTP_BAD_METHOD) {
-            System.out.println("\nThis service is available, but requires methods! \n<<<Sending appropriate methods to service>>>\n");
-            returnedCakeInvoice.add(restTemplate.postForObject(cleanCakes.toString(), request, CakeInvoice.class));
-            returnedCakeInvoice.add(restTemplate.postForObject(bakedCakes.toString(), request, CakeInvoice.class));
-            returnedCakeInvoice.add(restTemplate.postForObject(dreamCakes.toString(), request, CakeInvoice.class));
+        for (URL cakeServiceUrl : cakeService) {
+            HttpURLConnection serviceURLConnection = null;
+            try {
+                //open connection
+                serviceURLConnection = (HttpURLConnection) cakeServiceUrl.openConnection();
+                System.out.println(" RESPONSE CODE = " + serviceURLConnection.getResponseCode());
 
-        } else {
-            System.out.println("This service is available but can't be used here.");
+                //the response code for running services are 405 although they are running fine. Hence the comparison against HTTP_BAD_METHOD
+                if (serviceURLConnection.getResponseCode() == HttpURLConnection.HTTP_BAD_METHOD) {
+                    returnedCakeInvoice.add(restTemplate.postForObject(cakeServiceUrl.toString(),
+                            request, CakeInvoice.class));
+                } else if (serviceURLConnection.getResponseCode() != HttpURLConnection.HTTP_BAD_METHOD) {
+                    System.out.println(cakeServiceUrl.toString() + "Connection refused");
+                }
+                else {
+                    System.out.println("This service is available but can't be used here.");
+                }
+            } catch (Exception e) {
+                System.out.println(e);
+            }
         }
 
         for (CakeInvoice invoice : returnedCakeInvoice){
@@ -59,9 +66,9 @@ public class AllCakeServices {
         }
 
         ClientApplication clientApplication = new ClientApplication(appID, cakeSpec, returnedCakeInvoice);
-        System.out.println("invoices " + clientApplication.cakeInvoices().get(0).getCakery());
-        System.out.println("2 costs: " + clientApplication.cakeInvoices().get(1).getPrice());
-        System.out.println("3 costs: " + clientApplication.cakeInvoices().get(2).getPrice());
+//        System.out.println("1 costs: " + clientApplication.cakeInvoices().get(0).getPrice());
+//        System.out.println("2 costs: " + clientApplication.cakeInvoices().get(1).getPrice());
+//        System.out.println("3 costs: " + clientApplication.cakeInvoices().get(2).getPrice());
 
         String path = ServletUriComponentsBuilder.fromCurrentContextPath().build().toUriString()+ "/applications/" + appID;
         HttpHeaders headers = new HttpHeaders();
@@ -70,9 +77,9 @@ public class AllCakeServices {
         clientApplicationHashMap.put(appID,clientApplication);
         appID++;
 
+        //using Gson here as there was a serialization issue with any form of a list with Json.
+        //Which resulted the response failed to get any returned invoices.
         return new Gson().toJson(clientApplication);
-//        return new ResponseEntity<>(clientApplicationHashMap, headers, HttpStatus.CREATED);
-//        return new ResponseEntity<>(clientApplication, headers, HttpStatus.CREATED);
     }
 
     @RequestMapping(value="/applications/{id}",method= RequestMethod.GET)
@@ -81,13 +88,8 @@ public class AllCakeServices {
     }
 
     @RequestMapping(value="/applications",method= RequestMethod.GET)
-    public ResponseEntity<List<ClientApplication>> getApplications(){
-        List<ClientApplication> applicationList = new ArrayList<>();
-        for (ClientApplication clientApplication : clientApplicationHashMap.values()) {
-            applicationList.add(clientApplication);
-        }
-        return new ResponseEntity<>(applicationList, HttpStatus.CREATED);
-//        return new ArrayList<>(clientApplicationHashMap.values());
+    public List<ClientApplication> getApplications(){
+        return new ArrayList<>(clientApplicationHashMap.values());
     }
 
 }

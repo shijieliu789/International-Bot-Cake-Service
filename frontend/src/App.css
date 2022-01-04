@@ -47,13 +47,17 @@
 }
 
 .main-body {
-  padding-top: 3rem;
+  padding: 2rem 0rem;
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
   font-size: calc(10px + 2vmin);
   color: black;
+}
+
+.title {
+  margin-top: 0px;
 }
 
 .form-div {
