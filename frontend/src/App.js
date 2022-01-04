@@ -230,7 +230,7 @@ function App() {
             const sol = await response.json();
             console.log(sol.cakeInvoices);
             for (var i=0; i <=2; i++) {
-                alert(`${sol.cakeInvoices[i].cakery}: Price:${sol.cakeInvoices[i].price}`);
+                alert(`${sol.cakeInvoices[i].cakery} \nPrice: €${sol.cakeInvoices[i].price.toFixed(2)}`);
             }
         } catch(err) {
             throw err;
